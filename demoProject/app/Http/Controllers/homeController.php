@@ -7,6 +7,7 @@ use App\Models\userModel;
 use Hash;
 use Auth;
 use Illuminate\Support\Facades\Session;
+use Alert;
 class homeController extends Controller
 {
     public function registerPage(){
@@ -26,8 +27,8 @@ class homeController extends Controller
         $user->password=Hash::make($request->password);
         $user->type=1;
         $user->save();
-
-        return redirect()->back();
+        Alert::success("Successfully Registered");
+        return redirect()->route('registerPage');
 
 
     }

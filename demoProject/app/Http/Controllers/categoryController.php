@@ -39,7 +39,7 @@ class categoryController extends Controller
     public function update(Request $request){
         $request->validate([
             'categoryId'=>'required',
-            'name'=>'required|unique:categories,name,except,'.$request->categoryId,
+            'name'=>'required|unique:categories,name,'.$request->categoryId.',categoryId',
             'description'=>'required'
         ]);
 
@@ -54,7 +54,7 @@ class categoryController extends Controller
     public function destroy($id){
         categoryModel::find($id)->delete();
         Alert::success("Successfully Deleted");
-        return view('category.index');
+        return redirect()->route('category.index');
     }
 
 
