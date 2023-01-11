@@ -17,6 +17,7 @@ class Category extends Migration
             $table->engine='InnoDB';
             $table->bigIncrements("categoryId");
             $table->string("name")->unique();
+            $table->string("imageName")->nullable();
             $table->string('description');
             $table->timestamps();
 

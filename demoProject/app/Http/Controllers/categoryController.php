@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\categoryModel;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Storage;
 
 class categoryController extends Controller
 {
@@ -20,9 +21,14 @@ class categoryController extends Controller
     public function store(Request $request){
         $request->validate([
             'name'=>'required|unique:categories',
+            'imagePath' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description'=>'required'
         ]);
-
+        if(!Storage::exists('categoryImage')) {
+            Storage::makeDirectory('categoryImage'); //creates directory
+        }
+        $request->imagePath->storeAs('images', $imageName);
+        $imageName = $request->name.''.time().'.'.$request->imagePath->extension();  
         $category= new categoryModel();
         $category->name = $request->name;
         $category->description = $request->description;
