@@ -7,6 +7,8 @@
     <title>Document</title>
 </head>
 <body>
+    @include('sweetalert::alert')
+
     @include('layout.message')
     <form action="{{ route('register') }}" method="post">
         @csrf

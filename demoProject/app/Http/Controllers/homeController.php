@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\userModel;
 use Hash;
 use Auth;
+use Illuminate\Support\Facades\Session;
 class homeController extends Controller
 {
     public function registerPage(){
@@ -33,6 +34,9 @@ class homeController extends Controller
     public function loginPage(){
         return view('login');
     }
+    public function dashboard(){
+        return view('dashboard');
+    }
     public function loginAttempt(Request $request){
         $request->validate([
             'email'=>'required|email',
@@ -41,9 +45,19 @@ class homeController extends Controller
         $check=Auth::attempt(['email' => $request->email, 'password' => $request->password]);
 
         if($check){
-            return "login successful";
+            Alert::success('Login', 'Login Successful');
+            return redirect()->route('dashboard');
         }else{
-            return "Login failed";
+            Alert::success('Login', 'Login Failed');
+            return redirect()->route('loginPage');
         }
+    }
+
+    public function logout(){
+        Session::flush();
+        Auth::logout();
+        Alert::success('Take Care', 'Successfully Logged');
+        return redirect()->route('loginPage');
+
     }
 }

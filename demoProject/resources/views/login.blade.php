@@ -7,10 +7,12 @@
     <title>Login</title>
 </head>
 <body>
+    @include('sweetalert::alert')
+
     @include('layout.message')
     <form action="{{ route('loginAttempt') }}" method="post">
         @csrf
-      
+
         <label>email</label>
         <input type="text" name="email"value="{{ old('email') }}"  />
         <br />

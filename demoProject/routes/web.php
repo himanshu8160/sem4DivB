@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\categoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\demoController;
 use App\Http\Controllers\homeController;
@@ -19,9 +20,6 @@ Route::get('/', function () {
 });
 
 
-Route::get('/category', function () {
-    return view('category');
-});
 
 //How to pass data in routes
 Route::get('/demo/{num}',function($num){
@@ -33,11 +31,23 @@ Route::get('/demo/{num}',function($num){
 Route::get('/usingController',[demoController::class,'category']);
 
 
-Route::get('/register',[homeController::class,'registerPage']);
+Route::get('/register',[homeController::class,'registerPage'])->name('registerPage');
 
 
 Route::post('/register',[homeController::class,'register'])->name('register');
 
-Route::get('/login',[homecontroller::class,'loginPage']);
-
+Route::get('/login',[homecontroller::class,'loginPage'])->name('loginPage');
+Route::get('/dashboard',[homecontroller::class,'dashboard'])->name('dashboard');
 Route::post('loginAttempt',[homeController::class,'loginAttempt'])->name('loginAttempt');
+
+Route::middleware('auth')->group(function(){
+    Route::prefix('category')->name('category.')->group(function(){
+        Route::get('/', [categoryController::class, 'index'])->name('index');
+        Route::get('/create', [categoryController::class, 'create'])->name('create');
+        Route::get('/show/{id}', [categoryController::class, 'show'])->name('show');
+        Route::post('/store', [categoryController::class, 'store'])->name('store');
+        Route::get('/destroy/{id}', [categoryController::class, 'destroy'])->name('destroy');
+        Route::get('/edit/{id}', [categoryController::class, 'edit'])->name('edit');
+        Route::post('/update', [categoryController::class, 'update'])->name('update');
+    });
+});
