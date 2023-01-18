@@ -18,9 +18,13 @@ category
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-        <form method="post" action="{{ route('category.store') }}">
+        <form method="post" action="{{ route('category.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="row">
+              <div class="col-12 form-group">
+                <label class="form-label"> Image</label>
+                <input type="file" name="imagePath" class="form-control" value="{{ old('imagePath') }}" />
+             </div>
                 <div class="col-6 form-group">
                     <label class="form-label"> Name</label>
                     <input type="text" name="name" class="form-control" value="{{ old('name') }}" />

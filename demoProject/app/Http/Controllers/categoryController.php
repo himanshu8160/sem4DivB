@@ -24,13 +24,13 @@ class categoryController extends Controller
             'imagePath' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description'=>'required'
         ]);
-        if(!Storage::exists('categoryImage')) {
-            Storage::makeDirectory('categoryImage'); //creates directory
-        }
-        $request->imagePath->storeAs('images', $imageName);
-        $imageName = $request->name.''.time().'.'.$request->imagePath->extension();  
+       
+        $imageName = str_replace(' ', '_', $request->name).''.time().'.'.$request->imagePath->extension();
+        $request->imagePath->move(public_path('categoryImage'), $imageName);
+         
         $category= new categoryModel();
         $category->name = $request->name;
+        $category->imagePath = $imageName;
         $category->description = $request->description;
         $category->save();
         Alert::success("Successfully Inserted");

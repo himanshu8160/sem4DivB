@@ -24,6 +24,7 @@ category
             <thead>
             <tr>
               <th>Sr.no</th>
+              <th>Category Image</th>
               <th>Category Name</th>
               <th>Category Description</th>
               <th>Actions</th>
@@ -34,7 +35,9 @@ category
                 @foreach ($categories as $item)
                     <tr>
                         <td>{{ $count++ }} </td>
-
+                        <td>
+                          <img src="{{ asset('/categoryImage/'.$item->imagePath) }}" height="100px" width="100px" />  
+                        </td>
                         <td>{{ $item->name}} </td>
                         <td>
                             {{ $item->description }}
