@@ -1,5 +1,6 @@
 {
     "require": {
-        "realrashid/sweet-alert": "^5.1"
+        "realrashid/sweet-alert": "^5.1",
+        "shuchkin/simplexlsx": "^1.0"
     }
 }

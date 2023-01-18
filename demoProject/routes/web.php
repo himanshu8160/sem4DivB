@@ -49,5 +49,7 @@ Route::middleware('auth')->group(function(){
         Route::get('/destroy/{id}', [categoryController::class, 'destroy'])->name('destroy');
         Route::get('/edit/{id}', [categoryController::class, 'edit'])->name('edit');
         Route::post('/update', [categoryController::class, 'update'])->name('update');
+        Route::get('/bulkUpload', [categoryController::class, 'bulkUpload'])->name('bulkUpload');
+        Route::post('/bulkUploadAttempt', [categoryController::class, 'bulkUploadAttempt'])->name('bulkUploadAttempt');
     });
 });

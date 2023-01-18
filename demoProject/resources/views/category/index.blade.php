@@ -11,7 +11,9 @@ category
       <div class="card-tools">
         <!-- Buttons, labels, and many other things can be placed here! -->
         <!-- Here is a label for example -->
-
+        <button type="button" class="btn btn-success btn-sm">
+            <a href="{{ route('category.bulkUpload') }}"> <i class="fas fa-plus">BulkUpload</i></a>
+            </button>
         <button type="button" class="btn btn-success btn-sm">
           <a href="{{ route('category.create') }}"> <i class="fas fa-plus">Add</i></a>
           </button>
@@ -36,7 +38,7 @@ category
                     <tr>
                         <td>{{ $count++ }} </td>
                         <td>
-                          <img src="{{ asset('/categoryImage/'.$item->imagePath) }}" height="100px" width="100px" />  
+                          <img src="{{ asset('/categoryImage/'.$item->imagePath) }}" height="100px" width="100px" />
                         </td>
                         <td>{{ $item->name}} </td>
                         <td>
