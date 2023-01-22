@@ -8,6 +8,9 @@ use Hash;
 use Auth;
 use Illuminate\Support\Facades\Session;
 use Alert;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\EmailDemo;
+use Symfony\Component\HttpFoundation\Response;
 class homeController extends Controller
 {
     public function registerPage(){
@@ -60,5 +63,19 @@ class homeController extends Controller
         Alert::success('Take Care', 'Successfully Logged');
         return redirect()->route('loginPage');
 
+    }
+    public function sendEmail() {
+        $email = 'himanshusharma445653@gmail.com';
+
+        $mailData = [
+            'title' => 'Demo Email',
+            'url' => 'https://www.positronx.io'
+        ];
+
+        Mail::to($email)->send(new EmailDemo($mailData));
+
+        return response()->json([
+            'message' => 'Email has been sent.'
+        ], Response::HTTP_OK);
     }
 }

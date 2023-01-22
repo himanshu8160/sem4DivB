@@ -39,7 +39,7 @@ Route::post('/register',[homeController::class,'register'])->name('register');
 Route::get('/login',[homecontroller::class,'loginPage'])->name('loginPage');
 Route::get('/dashboard',[homecontroller::class,'dashboard'])->name('dashboard');
 Route::post('loginAttempt',[homeController::class,'loginAttempt'])->name('loginAttempt');
-
+Route::get('/sendemail', [homeController::class, 'sendEmail']);
 Route::middleware('auth')->group(function(){
     Route::prefix('category')->name('category.')->group(function(){
         Route::get('/', [categoryController::class, 'index'])->name('index');
