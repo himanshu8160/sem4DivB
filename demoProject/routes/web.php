@@ -40,6 +40,11 @@ Route::get('/login',[homecontroller::class,'loginPage'])->name('loginPage');
 Route::get('/dashboard',[homecontroller::class,'dashboard'])->name('dashboard');
 Route::post('loginAttempt',[homeController::class,'loginAttempt'])->name('loginAttempt');
 Route::get('/sendemail', [homeController::class, 'sendEmail']);
+Route::get('/forgotPassword', [homeController::class, 'forgotPasswordPage'])->name('forgotPasswordPage');
+Route::post('/forgotPasswordAttempt', [homeController::class, 'forgotPasswordAttempt'])->name('forgotPasswordAttempt');
+Route::get('/askOtp', [homeController::class, 'askOtp'])->name('askOtp');
+Route::post('/matchOtp', [homeController::class, 'matchOtp'])->name('matchOtp');
+
 Route::middleware('auth')->group(function(){
     Route::prefix('category')->name('category.')->group(function(){
         Route::get('/', [categoryController::class, 'index'])->name('index');

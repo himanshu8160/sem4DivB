@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\userModel;
+use App\Models\forgetPassword;
 use Hash;
 use Auth;
 use Illuminate\Support\Facades\Session;
 use Alert;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EmailDemo;
+use RealRashid\SweetAlert\Facades\Alert as FacadesAlert;
 use Symfony\Component\HttpFoundation\Response;
 class homeController extends Controller
 {
@@ -40,6 +42,41 @@ class homeController extends Controller
     }
     public function dashboard(){
         return view('dashboard');
+    }
+    public function forgotPasswordPage(){
+        return view('forgotPassword');
+    }
+    public function forgotPasswordAttempt(Request $request){
+       $request->validate([
+            'email'=> 'required|email'
+       ]);
+
+       $user=userModel::where('email',$request->email)->first();
+       if($user){
+            $otp=random_int(1000, 9999);
+            $fg=new forgetPassword();
+            $fg->userId=$user->id;
+            $fg->otp=$otp;
+            $fg->save();
+            return redirect()->route('askOtp')->with('id',$fg->id);
+       }else{
+        Alert::warning("Email not Found");
+        return redirect()->back();
+       }
+    }
+    public function askOtp(){
+        return view('askOtp');
+    }
+    public function matchOtp(Request $request){
+        $request->validate([
+            'id'=> 'required|numeric',
+            'otp'=>'required|numeric|digits:4'
+       ]);
+       $fg=forgetPassword::find($request->id);
+       if($fg->otp == $request->otp ){
+        
+       }
+       return $request;
     }
     public function loginAttempt(Request $request){
         $request->validate([

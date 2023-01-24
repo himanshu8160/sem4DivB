@@ -569,6 +569,8 @@ class ComposerStaticInita44bec9e32d02731ca15908a7e6fad07
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Imports\\categoryImport' => __DIR__ . '/../..' . '/app/Imports/categoryImport.php',
+        'App\\Mail\\EmailDemo' => __DIR__ . '/../..' . '/app/Mail/EmailDemo.php',
+        'App\\Mail\\forgotPassword' => __DIR__ . '/../..' . '/app/Mail/forgotPassword.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\categoryModel' => __DIR__ . '/../..' . '/app/Models/categoryModel.php',
         'App\\Models\\userModel' => __DIR__ . '/../..' . '/app/Models/userModel.php',
